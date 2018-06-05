@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 4 Props & States</title>
+</head>
+<body>
+	<div id='root'></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+     <script type="text/babel">
+     	class Welcome extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state={date: new Date(), name: "Kenton Wan"}
+				}
+
+				componentDidMount() {
+					this.timerID = setInterval(
+						()=>this.tick(), 1000);
+				}
+
+				componentWillUnmount() {
+					clearInterval(this.timerID)
+				}
+
+				tick() {
+					this.setState({date: new Date()
+					});
+				}
+
+     		render () {
+     			return (
+     				<div>
+							<img src={this.props.image} alt="Kenton Wan"/>
+              <h2>My {this.props.number}</h2>
+              <h2>Assignment</h2>
+              <h2>Completed</h2>
+							<h3>By: {this.state.name}</h3>
+							<h4>Curent Date: {this.state.date.toLocaleTimeString()}</h4>
+
+     				</div>);
+     		};
+		}
+
+			const info = {number: "Second", image: 'https://c1.staticflickr.com/1/889/40613150720_cbd9e18304_b.jpg'}
+
+     	ReactDOM.render(
+     		<Welcome
+					number={info.number}
+					image={info.image}
+					/>, document.getElementById('root'));
+     </script>
+</body>
+</html>
